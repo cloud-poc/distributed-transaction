@@ -1,14 +1,20 @@
-spring.datasource:
-  order:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
-    username: jamie
-    password: Hsbc1234
-  user:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://maria.c8rp1x5gocqr.ap-northeast-1.rds.amazonaws.com:3306/user?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
-    username: root
-    password: Hsbc1234
+spring:
+  datasource:
+    order:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+      username: jamie
+      password: Hsbc1234
+    user:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://maria.c8rp1x5gocqr.ap-northeast-1.rds.amazonaws.com:3306/user?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+      username: root
+      password: Hsbc1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
 
 logging:
   level:
@@ -19,3 +25,4 @@ logging:
     org.springframework.jdbc: debug
     javax.transaction: debug
     hibernate.SQL: debug
+    org.springframework.orm.jpa: debug

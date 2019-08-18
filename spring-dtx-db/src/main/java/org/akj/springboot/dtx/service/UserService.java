@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.akj.springboot.dtx.bean.UserInfoResponse;
 import org.akj.springboot.dtx.entity.Customer;
 import org.akj.springboot.dtx.entity.Order;
+import org.akj.springboot.dtx.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,9 +23,12 @@ public class UserService {
     @Autowired
     @Qualifier("userJdbcTemplate")
     private JdbcTemplate userJdbcTemplate;
+//    @Autowired
+//    @Qualifier("orderJdbcTemplate")
+//    private JdbcTemplate orderJdbcTemplate;
+
     @Autowired
-    @Qualifier("orderJdbcTemplate")
-    private JdbcTemplate orderJdbcTemplate;
+    private OrderRepository orderRepository;
 
     public UserInfoResponse getUserInfo(@PathVariable Integer uid) {
         UserInfoResponse userInfoResponse = new UserInfoResponse();
@@ -34,7 +38,8 @@ public class UserService {
         userInfoResponse.setUser(customers.get(0));
 
         // 2. get order list
-        List<Order> orders = orderJdbcTemplate.query(SQL_FIND_ORDERS_BY_USER_ID, new Object[]{uid}, new BeanPropertyRowMapper<Order>(Order.class));
+        //List<Order> orders = orderJdbcTemplate.query(SQL_FIND_ORDERS_BY_USER_ID, new Object[]{uid}, new BeanPropertyRowMapper<Order>(Order.class));
+        List<Order> orders = orderRepository.findByUserId(uid);
         userInfoResponse.setOrders(orders);
 
         //TODO error handle
