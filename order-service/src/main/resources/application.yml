@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    pool-name: SpringBootHikariCP
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+    username: jamie
+    password: Hsbc1234
+    initialization-mode: always
+    hikari:
+      auto-commit: false
+      connection-test-query: SELECT 1
+      maximum-pool-size: 5
+      idle-timeout: 30000
+      minimum-idle: 2
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  application:
+    name: order-service
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka/}
+server:
+  port: 10002
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,hystrix.stream

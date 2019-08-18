@@ -1,0 +1,20 @@
+logging:
+  level:
+    root: warn
+    org.akj: debug
+    com.atomikos: error
+    org.springframework.transaction: debug
+    org.springframework.jms: debug
+    org.springframework.jdbc: warn
+    org.springframework.orm.jpa: debug
+    javax.transaction: error
+    javax.jms: warn
+    hibernate.jpa: warn
+    hibernate.SQL: warn
+    org.apache.activemq: error
+
+spring:
+  jta:
+    atomikos:
+      connectionfactory:
+        max-pool-size: 5

@@ -1,0 +1,21 @@
+spring.datasource:
+  order:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+    username: jamie
+    password: Hsbc1234
+  user:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://maria.c8rp1x5gocqr.ap-northeast-1.rds.amazonaws.com:3306/user?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+    username: root
+    password: Hsbc1234
+
+logging:
+  level:
+    root: warn
+    org.akj: debug
+    com.atomikos: error
+    org.springframework.transaction: debug
+    org.springframework.jdbc: debug
+    javax.transaction: debug
+    hibernate.SQL: debug
