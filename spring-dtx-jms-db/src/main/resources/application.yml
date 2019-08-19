@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+    username: jamie
+    password: Hsbc1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+#  activemq:
+#    broker-url: tcp://localhost:61616
+#    packages:
+#      trust-all: true
+
+logging:
+  level:
+    root: warn
+    org.akj: debug
+    com.atomikos: error
+    org.springframework.transaction: debug
+    org.springframework.jdbc: debug
+    javax.transaction: debug
+    hibernate.SQL: debug
+    org.springframework.orm.jpa: debug
+    org.springframework.jms: debug
+    org.apache.activemq: debug
