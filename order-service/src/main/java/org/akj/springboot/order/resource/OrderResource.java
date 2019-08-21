@@ -1,7 +1,7 @@
 package org.akj.springboot.order.resource;
 
 import org.akj.springboot.order.entity.Order;
-import org.akj.springboot.order.repository.OrderRepository;
+import org.akj.springboot.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,24 +12,25 @@ import java.util.List;
 public class OrderResource {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     @PostMapping
     public Order create(@RequestBody Order order) {
-        order = orderRepository.save(order);
+        order = orderService.create(order);
+
         return order;
     }
 
     @GetMapping("/{uid}")
     public List<Order> getMyOrder(@PathVariable Integer uid) {
-       List<Order> orders = orderRepository.findByUserId(uid);
+       List<Order> orders = orderService.findByUserId(uid);
 
         return orders;
     }
 
     @GetMapping("")
     public List<Order> getAll() {
-        return orderRepository.findAll();
+        return orderService.findAll();
     }
 
 }

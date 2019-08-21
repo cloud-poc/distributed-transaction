@@ -1,29 +1,23 @@
 spring:
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    pool-name: SpringBootHikariCP
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
-    username: jamie
-    password: Hsbc1234
-    initialization-mode: always
-    hikari:
-      auto-commit: false
-      connection-test-query: SELECT 1
-      maximum-pool-size: 5
-      idle-timeout: 30000
-      minimum-idle: 2
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
   application:
     name: order-service
+  datasource:
+    order:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/xa_order?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+      username: jamie
+      password: Hsbc1234
+    ticket:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/xa_ticket?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+      username: jamie
+      password: Hsbc1234
+
 eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka/}
+
 server:
   port: 10002
 
@@ -32,3 +26,15 @@ management:
     web:
       exposure:
         include: health,info,hystrix.stream
+
+swagger.api:
+  enabled: true
+  title: "Ticket Order Service"
+  description: "Sample Microservice - order service for demonstration purpose"
+  terms-of-service-url: "https://oauth.net/2"
+  version: "v1.0.0"
+  controller:
+    base-package: "org.akj.springboot"
+  contact:
+    name: "Jamie Zhang"
+    email: "akjamie.zhang@outlook.com"
