@@ -1,4 +1,4 @@
-package org.akj.springboot.dtx.configuration;
+package org.akj.springboot.ticket.configuration;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.RedeliveryPolicy;
@@ -11,7 +11,6 @@ import javax.jms.ConnectionFactory;
 
 @Configuration
 public class JMSConfiguration {
-
     @Bean
     public ConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
@@ -32,11 +31,10 @@ public class JMSConfiguration {
         return factoryProxy;
     }
 
-    @Bean
+    //@Bean
     public JmsTemplate jmsTemplate(ConnectionFactory connectionFactory){
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
         jmsTemplate.setSessionTransacted(true);
-        jmsTemplate.setMessageConverter();
 
         return jmsTemplate;
     }

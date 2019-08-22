@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class TicketInfoRepository {
-    private static  final String SQL_TICKET_LOCK = "update TicketInfo set count = count - ? where count >= ?";
+    private static  final String SQL_TICKET_LOCK = "update ticket_info set count = count - ? where count >= ?";
 
     @Autowired
     @Qualifier("ticketJdbcTemplate")

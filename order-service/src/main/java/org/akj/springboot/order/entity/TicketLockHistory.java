@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Entity(name = "ticket_lock")
+//@Entity(name = "ticket_lock")
 @Data
-public class TicketLock {
+public class TicketLockHistory {
     @Id
     private String id;
 

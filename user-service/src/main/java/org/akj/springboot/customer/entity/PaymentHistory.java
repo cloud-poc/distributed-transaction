@@ -3,29 +3,25 @@ package org.akj.springboot.customer.entity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
+@Entity(name = "payment_history")
 @Data
-@Entity
-public class Customer {
+public class PaymentHistory {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    private String name;
+    private String orderId;
 
-    @Column(unique = true)
-    private String userName;
+    private BigDecimal amount;
 
-    private String password;
-
-    private BigDecimal balance;
+    private String userId;
 
     private LocalDateTime createDate;
-
-    private LocalDateTime lastUpdateTime;
 }

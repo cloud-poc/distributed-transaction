@@ -1,4 +1,4 @@
-package org.akj.springboot.order.entity;
+package org.akj.springboot.ticket.entity;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-//@Entity(name="ticket_info")
+@Entity(name="ticket_info")
 @Data
 public class TicketInfo {
     @Id

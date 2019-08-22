@@ -1,3 +1,4 @@
+use xa_ticket;
 CREATE TABLE `ticket_lock` (
   `id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `count` int(11) NOT NULL,
@@ -9,8 +10,6 @@ CREATE TABLE `ticket_lock` (
   UNIQUE KEY `UK_8uwg33i5b6d0l3hsu37ickm6n` (`orderId`),
   UNIQUE KEY `UK_gn56ghsc3feg1ynip9uvja0h9` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 
 CREATE TABLE `ticket_info` (
   `id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,

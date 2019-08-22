@@ -3,7 +3,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     pool-name: SpringBootHikariCP
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+    url: jdbc:mysql://localhost:3306/xa_users?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
     username: jamie
     password: Hsbc1234
     initialization-mode: always
@@ -20,6 +20,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
   application:
     name: user-service
+
 eureka:
   client:
     service-url:
@@ -27,8 +28,24 @@ eureka:
 server:
   port: 10001
 
+feign:
+  hystrix:
+    enabled: true
+
 management:
   endpoints:
     web:
       exposure:
         include: info,health,hystrix.stream
+
+swagger.api:
+  enabled: true
+  title: "User Service"
+  description: "Sample Micro-service - user service for demonstration purpose"
+  terms-of-service-url: "https://oauth.net/2"
+  version: "v1.0.0"
+  controller:
+    base-package: "org.akj.springboot"
+  contact:
+    name: "Jamie Zhang"
+    email: "akjamie.zhang@outlook.com"

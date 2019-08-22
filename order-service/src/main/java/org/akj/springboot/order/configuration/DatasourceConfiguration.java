@@ -53,7 +53,7 @@ public class DatasourceConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
-        vendorAdapter.setGenerateDdl(false);
+        vendorAdapter.setGenerateDdl(true);
         vendorAdapter.setShowSql(true);
 
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();

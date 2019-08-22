@@ -1,20 +1,19 @@
-package org.akj.springboot.order.entity;
+package org.akj.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.lang.NonNull;
 
-import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-
-@Entity(name = "ticket_order")
 @Data
 public class Order implements Serializable {
-    @Id
     private String id;
 
-    @Column(nullable = false,name="user_id")
+    @NotNull
     private String userId;
 
     private String title;
@@ -23,13 +22,16 @@ public class Order implements Serializable {
 
     private String status;
 
-    @Column(name="ticket_count")
+    @NotNull
+    @Min(1)
+    @Max(5)
     private int ticketCount;
 
-    @Column(name="unit_price")
+    @NotNull
+    @DecimalMin("0.01")
+    @DecimalMax("1000000")
     private BigDecimal unitPrice;
 
-    @Column(name="create_date")
     private LocalDateTime createDate;
 
     private String remark;

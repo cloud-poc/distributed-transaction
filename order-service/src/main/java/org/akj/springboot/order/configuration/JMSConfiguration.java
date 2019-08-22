@@ -16,7 +16,7 @@ public class JMSConfiguration {
     public ConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
         factory.setTrustAllPackages(true);
-        //factory.setMaxThreadPoolSize(5);
+        factory.setMaxThreadPoolSize(5);
 
         RedeliveryPolicy queuePolicy = new RedeliveryPolicy();
         queuePolicy.setInitialRedeliveryDelay(0);
@@ -36,7 +36,6 @@ public class JMSConfiguration {
     public JmsTemplate jmsTemplate(ConnectionFactory connectionFactory){
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
         jmsTemplate.setSessionTransacted(true);
-        jmsTemplate.setMessageConverter();
 
         return jmsTemplate;
     }

@@ -12,6 +12,10 @@ spring:
       url: jdbc:mysql://localhost:3306/xa_ticket?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
       username: jamie
       password: Hsbc1234
+  activemq:
+    broker-url: tcp://localhost:61616
+    packages:
+      trust-all: true
 
 eureka:
   client:
@@ -20,6 +24,10 @@ eureka:
 
 server:
   port: 10002
+
+feign:
+  hystrix:
+    enabled: true
 
 management:
   endpoints:
