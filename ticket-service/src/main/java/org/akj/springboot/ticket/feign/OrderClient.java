@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
-@FeignClient(value = "order-service", path = "/orders")
+@FeignClient(value = "order-service", path = "/orders", fallbackFactory = OrderServiceFallbackFactory.class)
 public interface OrderClient {
     @PutMapping
     public Order update(@RequestBody @Valid Order order);

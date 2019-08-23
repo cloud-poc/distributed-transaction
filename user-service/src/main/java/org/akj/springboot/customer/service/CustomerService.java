@@ -49,7 +49,7 @@ public class CustomerService {
 
     private Random random = new Random(10l);
 
-    @HystrixCommand(commandKey = "customer-repository-list-all", groupKey = "customer",
+    @HystrixCommand(commandKey = "customer-repository-list-all", groupKey = "customer-service",
             fallbackMethod = "customersListAllFallback", ignoreExceptions = {NullPointerException.class},
             threadPoolProperties = {
                     @HystrixProperty(name = "coreSize", value = "30"),
@@ -100,8 +100,8 @@ public class CustomerService {
         }
     }
 
-    public List<Customer> customersListAllFallback() {
-        return new ArrayList<>(0);
+    public void customersListAllFallback() {
+        throw new BusinessException("ERROR-003-003", "service is unavailable");
     }
 
     public Customer findCustomerById(String uid) {
