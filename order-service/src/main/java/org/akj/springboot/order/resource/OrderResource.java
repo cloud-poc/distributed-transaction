@@ -28,11 +28,18 @@ public class OrderResource {
         return orderBean;
     }
 
-    @GetMapping("/{uid}")
-    public List<Order> getMyOrder(@PathVariable String uid) {
+    @GetMapping("/user/{userId}")
+    public List<Order> getOrdersByUserId(@PathVariable("userId") String uid) {
        List<Order> orders = orderService.findByUserId(uid);
 
         return orders;
+    }
+
+    @GetMapping("/{orderId}")
+    public Order getOrder(@PathVariable String orderId) {
+        Order order = orderService.findOrderById(orderId);
+
+        return order;
     }
 
     @GetMapping("")

@@ -3,10 +3,7 @@ package org.akj.springboot.ticket.entity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,9 +17,14 @@ public class Ticket {
     )
     private Integer id;
 
+    @Column(nullable = false)
     private String orderId;
 
+    @Column(nullable = false)
     private String userId;
+
+    @Column(nullable = false,name="ticket_info_id")
+    private String ticketInfoId;
 
     private LocalDateTime createDate;
 }

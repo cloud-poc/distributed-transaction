@@ -5,7 +5,7 @@ import com.fasterxml.uuid.impl.TimeBasedGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.akj.springboot.common.exception.BusinessException;
 import org.akj.springboot.order.entity.Order;
-import org.akj.springboot.order.entity.TicketLockHistory;
+import org.akj.springboot.order.model.TicketLockHistory;
 import org.akj.springboot.order.repository.OrderRepository;
 import org.akj.springboot.order.repository.TicketInfoRepository;
 import org.akj.springboot.order.repository.TicketLockHistoryRepository;
@@ -44,17 +44,17 @@ public class OrderService {
         }
 
         // if no tickets, throw no ticket exception
-        int lock = ticketInfoRepository.lock(order.getTicketCount());
+        int lock = ticketInfoRepository.lock(order.getTicketInfoId(), order.getTicketCount());
         if (lock < 1) {
-            throw new BusinessException("ERROR-20-001", "no ticket available");
+            throw new BusinessException("ERROR-001-001", "no ticket available");
         }
 
         // save ticket lock history
         TicketLockHistory ticketLock = new TicketLockHistory();
         ticketLock.setCount(order.getTicketCount());
         ticketLock.setCreateDate(LocalDateTime.now());
-        ticketLock.setId(timeBasedGenerator.generate().toString());
         ticketLock.setOrderId(order.getId());
+        ticketLock.setTicketInfoId(order.getTicketInfoId());
         ticketLockRepository.save(ticketLock);
 
         order.setStatus("NEW");
@@ -77,6 +77,7 @@ public class OrderService {
         o.setTitle(order.getTitle());
         o.setUnitPrice(order.getUnitPrice());
         o.setUserId(order.getUserId());
+        o.setTicketInfoId(order.getTicketInfoId());
         o.setRemark(order.getRemark());
 
         return o;
@@ -92,6 +93,7 @@ public class OrderService {
         o.setTitle(order.getTitle());
         o.setUnitPrice(order.getUnitPrice());
         o.setUserId(order.getUserId());
+        o.setTicketInfoId(order.getTicketInfoId());
         o.setRemark(order.getRemark());
 
         return o;
@@ -106,6 +108,7 @@ public class OrderService {
     }
 
     @JmsListener(destination = "ticket:order:generated")
+    @Transactional
     public void orderFinished(@Payload org.akj.springboot.model.Order order) {
         log.info("finished order {}", order);
 
@@ -142,15 +145,19 @@ public class OrderService {
 
     @Transactional
     public void pay(String orderId) {
-        Optional<Order> optional = orderRepository.findById(orderId);
-        if (!optional.isPresent()) {
-            throw new BusinessException("ERROR-003-001", "no order found by given orderId:" + orderId);
-        }
-
-        Order order = optional.get();
+        Order order = findOrderById(orderId);
         org.akj.springboot.model.Order o = constructOrderDTO(order);
 
-        jmsTemplate.convertAndSend("ticket:order:new",o);
+        jmsTemplate.convertAndSend("ticket:order:new", o);
         log.debug("sent order to ticket:order:new queue for payment - {}", o);
+    }
+
+    public Order findOrderById(String orderId) {
+        Optional<Order> optional = orderRepository.findById(orderId);
+        if(!optional.isPresent()){
+            throw new BusinessException("ERROR-001-002", "no order found by given orderId:" + orderId);
+        }
+
+        return optional.get();
     }
 }

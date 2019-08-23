@@ -1,4 +1,4 @@
-package org.akj.springboot.order.entity;
+package org.akj.springboot.order.model;
 
 import lombok.Data;
 
@@ -7,17 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-//@Entity(name = "ticket_lock")
 @Data
 public class TicketLockHistory {
-    @Id
-    private String id;
+    private Integer id;
 
     private int count;
 
-    @Column(nullable = false,unique = true,name = "order_id")
     private String orderId;
 
-    @Column(name="create_date")
+    private String ticketInfoId;
+
     private LocalDateTime  createDate;
 }

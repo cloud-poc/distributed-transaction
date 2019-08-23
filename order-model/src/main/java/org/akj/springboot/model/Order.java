@@ -16,6 +16,9 @@ public class Order implements Serializable {
     @NotNull
     private String userId;
 
+    @NotNull
+    private String ticketInfoId;
+
     private String title;
 
     private String detail;

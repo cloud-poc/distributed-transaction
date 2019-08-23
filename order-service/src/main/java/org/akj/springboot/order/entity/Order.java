@@ -3,6 +3,7 @@ package org.akj.springboot.order.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,6 +17,9 @@ public class Order implements Serializable {
 
     @Column(nullable = false,name="user_id")
     private String userId;
+
+    @Column(nullable = false,name="ticket_info_id")
+    private String ticketInfoId;
 
     private String title;
 

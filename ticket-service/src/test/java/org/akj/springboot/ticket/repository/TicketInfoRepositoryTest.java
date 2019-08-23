@@ -21,7 +21,7 @@ class TicketInfoRepositoryTest {
 
         TicketInfo ticketInfo = new TicketInfo();
         ticketInfo.setId(timeBasedGenerator.generate().toString());
-        ticketInfo.setCount(5);
+        ticketInfo.setTotal(5);
         ticketInfo.setName("2019-08-21");
         ticketInfo.setDescription("Ticket for FinTech");
         LocalDateTime now = LocalDateTime.now();

@@ -108,7 +108,7 @@ public class CustomerService {
         Optional<Customer> customerOptional = repository.findById(uid);
 
         if(!customerOptional.isPresent()){
-           throw new RuntimeException("user does not exists");
+           throw new BusinessException("ERROR-003-002","user does not exists");
         }
 
         return customerOptional.get();
@@ -152,7 +152,7 @@ public class CustomerService {
     public Customer deposit(DepositRequest request) {
         Optional<Customer> option = repository.findById(request.getUserId());
         if(!option.isPresent()){
-            throw new BusinessException("ERROR-010-001", "wrong user information provided");
+            throw new BusinessException("ERROR-003-001", "wrong user information provided");
         }
 
         Customer customer = option.get();

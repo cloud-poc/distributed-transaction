@@ -18,7 +18,7 @@ public class TicketInfo {
 
     private String description;
 
-    private Integer count;
+    private Integer total;
 
     @Column(name = "last_update_date")
     private LocalDateTime lastUpdateDate;

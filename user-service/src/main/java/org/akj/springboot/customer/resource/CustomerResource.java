@@ -40,7 +40,7 @@ public class CustomerResource {
         Customer u = service.findCustomerById(uid);
         userInfo.setUser(u);
 
-        List<Order> orders = client.findByUserId(uid);
+        List<Order> orders = client.findOrdersByUserId(uid);
         userInfo.setOrders(orders);
 
         return userInfo;

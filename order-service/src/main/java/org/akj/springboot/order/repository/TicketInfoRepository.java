@@ -7,13 +7,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class TicketInfoRepository {
-    private static  final String SQL_TICKET_LOCK = "update ticket_info set count = count - ? where count >= ?";
+    private static  final String SQL_TICKET_LOCK = "update ticket_info set total = total - ? where total >= ? and id= ?";
 
     @Autowired
     @Qualifier("ticketJdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
-    public int lock(int ticketCount){
-        return jdbcTemplate.update(SQL_TICKET_LOCK, new Object[]{ticketCount,ticketCount});
+    public int lock(String ticketInfoId, int ticketCount){
+        return jdbcTemplate.update(SQL_TICKET_LOCK, new Object[]{ticketCount,ticketCount,ticketInfoId});
     }
 }
