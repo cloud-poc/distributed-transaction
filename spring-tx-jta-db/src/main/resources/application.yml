@@ -1,0 +1,44 @@
+logging:
+  level:
+    root: warn
+    org.akj: debug
+    com.atomikos: debug
+    org.springframework.transaction: debug
+    org.springframework.jms: debug
+    org.springframework.jdbc: debug
+    org.springframework.orm.jpa: debug
+    javax.transaction: debug
+    javax.jms: warn
+    hibernate.jpa: warn
+    hibernate.SQL: warn
+    org.apache.activemq: error
+    org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor: error
+
+spring:
+  jta:
+    atomikos:
+      connectionfactory:
+        max-pool-size: 100
+        min-pool-size: 20
+        borrow-connection-timeout: 60
+      properties:
+        max-timeout: 60000
+        threaded-two-phase-commit: true
+        borrow-connection-timeout: 60
+  datasource:
+    user:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+      username: jamie
+      password: Hsbc1234
+
+    audit:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://maria.c8rp1x5gocqr.ap-northeast-1.rds.amazonaws.com:3306/xa?allowPublicKeyRetrieval=true&useSSL=false&charset=utf8
+      username: root
+      password: Hsbc1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
